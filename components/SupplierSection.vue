@@ -3,8 +3,8 @@
 		<div class="container mx-auto px-4 lg:px-8">
 			<!-- 標題區域 -->
 			<header class="text-center mb-8">
-				<h2 class="text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 mb-6">合作夥伴</h2>
-				<p class="text-xl md:text-2xl lg:text-3xl gradient-text font-bold mx-auto leading-relaxed">攜手遠岫科技，提供全方位的智慧安全解決方案</p>
+				<h2 class="text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 mb-2 md:mb-4">合作夥伴</h2>
+				<p class="text-xl md:text-2xl lg:text-3xl gradient-text font-bold mx-auto leading-relaxed">提供全方位的智慧安全解決方案</p>
 			</header>
 
 			<!-- 遠岫科技介紹 -->
@@ -21,7 +21,7 @@
 					preload
 				/>
 				<div class="flex-1">
-					<h3 class="text-2xl font-bold text-gray-900 mb-4">遠岫科技有限公司</h3>
+					<h3 class="text-2xl font-bold text-gray-900 mb-2 md:mb-4">遠岫科技有限公司</h3>
 					<p class="text-gray-700 leading-relaxed">
 						專注於人臉辨識門禁、智慧對講、影像監控與整合平台的開發與導入， 致力於成為企業與建築場域「出入口安全」與「智慧整合」的最佳夥伴。<br />
 						提供 12 大智慧方案，涵蓋多個領域，提升生活與工作空間的便捷、安全與高效。
@@ -29,7 +29,7 @@
 					<a
 						href="https://www.yenshow.com/"
 						target="_blank"
-						class="inline-flex items-center gap-2 mt-4 text-brand-orange hover:text-brand-red transition-colors font-semibold"
+						class="flex justify-end md:justify-start items-center gap-2 mt-4 text-brand-orange hover:text-brand-red transition-colors font-semibold"
 					>
 						<span>了解更多</span>
 						<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -296,13 +296,6 @@ const solutionCategories = [
 	box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 	transform: translateY(-0.25rem);
 	border-color: #f97316;
-}
-
-.solution-card.active {
-	box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-	transform: translateY(-0.25rem);
-	border-color: #f97316;
-	background: linear-gradient(135deg, #fff7ed 0%, #fed7aa 100%);
 }
 
 .card-content {

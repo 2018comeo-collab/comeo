@@ -4,8 +4,8 @@
 			<div class="grid gap-8 grid-cols-1 lg:grid-cols-2 mb-8">
 				<!-- 聯絡我們 -->
 				<div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-200 contact-info">
-					<h4 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-						<svg class="w-5 h-5 text-brand-orange" fill="currentColor" viewBox="0 0 20 20">
+					<h4 class="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+						<svg class="w-6 h-6 text-brand-orange" fill="currentColor" viewBox="0 0 20 20">
 							<path
 								fill-rule="evenodd"
 								d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
@@ -16,10 +16,10 @@
 					</h4>
 
 					<!-- 聯絡方式 -->
-					<div class="space-y-4">
+					<div class="space-y-4 lg:space-y-8">
 						<!-- 電話 -->
-						<div class="flex items-center gap-3 p-4 rounded-lg bg-gray-50">
-							<div class="flex-shrink-0 w-12 h-12 bg-brand-orange rounded-lg flex items-center justify-center">
+						<div class="flex items-center gap-3 p-4 rounded-xl bg-gradient-to-r from-gray-50 to-gray-100 border border-gray-200">
+							<div class="w-14 h-14 bg-gradient-to-br from-brand-orange to-orange-600 rounded-xl flex items-center justify-center">
 								<svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
 									<path
 										d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"
@@ -27,28 +27,31 @@
 								</svg>
 							</div>
 							<div>
-								<p class="text-sm text-gray-600">電話</p>
-								<a href="tel:0920-370-177" class="font-bold text-gray-900 text-lg hover:text-brand-orange transition-colors">0920-370-177</a>
+								<p class="text-base text-gray-600">電話</p>
+								<a href="tel:0920-370-177" class="font-bold text-gray-900 text-xl hover:text-brand-orange transition-colors">0920-370-177</a>
 							</div>
 						</div>
 
 						<!-- Email -->
-						<div class="flex items-center gap-3 p-4 rounded-lg bg-gray-50">
-							<div class="flex-shrink-0 w-12 h-12 bg-brand-orange rounded-lg flex items-center justify-center">
+						<div class="flex items-center gap-3 p-4 rounded-xl bg-gradient-to-r from-gray-50 to-gray-100 border border-gray-200">
+							<div class="w-14 h-14 bg-gradient-to-br from-brand-orange to-orange-600 rounded-xl flex items-center justify-center">
 								<svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
 									<path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
 									<path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
 								</svg>
 							</div>
 							<div>
-								<p class="text-sm text-gray-600">Email</p>
-								<a href="mailto:stan@comeo.com.tw" class="font-bold text-gray-900 text-lg hover:text-brand-orange transition-colors">stan@comeo.com.tw</a>
+								<p class="text-base text-gray-600">Email</p>
+								<a href="mailto:stan@comeo.com.tw" class="font-bold text-gray-900 text-xl hover:text-brand-orange transition-colors">stan@comeo.com.tw</a>
+								<a href="mailto:jerry@comeo.com.tw" class="ms-4 font-bold text-gray-900 text-xl hover:text-brand-orange transition-colors"
+									>jerry@comeo.com.tw</a
+								>
 							</div>
 						</div>
 
 						<!-- 地址 -->
-						<div class="flex items-start gap-3 p-4 rounded-lg bg-gray-50">
-							<div class="flex-shrink-0 w-12 h-12 bg-brand-orange rounded-lg flex items-center justify-center">
+						<div class="flex items-center gap-3 p-4 rounded-xl bg-gradient-to-r from-gray-50 to-gray-100 border border-gray-200">
+							<div class="w-14 h-14 bg-gradient-to-br from-brand-orange to-orange-600 rounded-xl flex items-center justify-center">
 								<svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
 									<path
 										fill-rule="evenodd"
@@ -58,22 +61,22 @@
 								</svg>
 							</div>
 							<div class="flex-1">
-								<p class="text-sm text-gray-600 mb-1">地址</p>
-								<p class="font-bold text-gray-900 text-lg">23584新北市中和區橋和路122號7樓</p>
+								<p class="text-base text-gray-600">地址</p>
+								<p class="font-bold text-gray-900 text-xl leading-relaxed">23584新北市中和區橋和路122號7樓</p>
 							</div>
 						</div>
 
 						<!-- 社群媒體 -->
-						<div class="flex items-center gap-3 p-4 rounded-lg bg-gray-50">
-							<div class="flex-shrink-0 w-12 h-12 bg-brand-orange rounded-lg flex items-center justify-center">
+						<div class="flex items-center gap-4 p-5 rounded-xl bg-gradient-to-r from-gray-50 to-gray-100 border border-gray-200">
+							<div class="w-14 h-14 bg-gradient-to-br from-brand-orange to-orange-600 rounded-xl flex items-center justify-center">
 								<svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
 									<path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z" />
 									<path d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h2a2 2 0 002-2V9a2 2 0 00-2-2h-1z" />
 								</svg>
 							</div>
 							<div class="flex-1">
-								<p class="text-sm text-gray-600 mb-2">社群媒體</p>
-								<div class="flex flex-wrap gap-2">
+								<p class="text-base text-gray-600">社群媒體</p>
+								<div class="flex flex-wrap gap-3">
 									<a
 										href="https://www.facebook.com/ComeoTech"
 										target="_blank"
@@ -106,149 +109,13 @@
 					</div>
 				</div>
 
-				<!-- 諮詢表單 -->
-				<div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-200 contact-form">
-					<h4 class="text-xl font-bold text-gray-900 mb-6">諮詢表單</h4>
-					<form class="space-y-4" @submit.prevent="onSubmit" role="form" aria-label="諮詢表單">
-						<!-- 成功訊息 -->
-						<div v-if="showSuccessMessage" class="bg-green-50 border border-green-200 rounded-lg p-4 mb-4" role="alert" aria-live="polite">
-							<div class="flex items-center gap-3">
-								<svg class="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-									<path
-										fill-rule="evenodd"
-										d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-										clip-rule="evenodd"
-									/>
-								</svg>
-								<p class="text-green-800 font-medium">已收到您的需求，我們將儘快與您聯繫！</p>
-							</div>
-						</div>
-
-						<!-- 第一行：公司名稱 / 聯絡人 -->
-						<div class="grid grid-cols-2 gap-4">
-							<div>
-								<label for="company" class="block text-sm font-medium text-gray-700 mb-2"> 公司名稱 <span class="text-red-500">*</span> </label>
-								<input
-									id="company"
-									v-model="state.company"
-									@input="clearError('company')"
-									type="text"
-									placeholder="請輸入公司名稱"
-									:aria-invalid="!!errors.company"
-									:aria-describedby="errors.company ? 'company-error' : undefined"
-									required
-									:class="[
-										'w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-orange focus:border-transparent transition-colors',
-										errors.company ? 'border-red-300 bg-red-50' : 'border-gray-300'
-									]"
-								/>
-								<p v-if="errors.company" id="company-error" class="text-red-600 text-sm mt-1" role="alert">{{ errors.company }}</p>
-							</div>
-							<div>
-								<label for="name" class="block text-sm font-medium text-gray-700 mb-2"> 聯絡人 <span class="text-red-500">*</span> </label>
-								<input
-									id="name"
-									v-model="state.name"
-									@input="clearError('name')"
-									type="text"
-									placeholder="請輸入聯絡人姓名"
-									:aria-invalid="!!errors.name"
-									:aria-describedby="errors.name ? 'name-error' : undefined"
-									required
-									:class="[
-										'w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-orange focus:border-transparent transition-colors',
-										errors.name ? 'border-red-300 bg-red-50' : 'border-gray-300'
-									]"
-								/>
-								<p v-if="errors.name" id="name-error" class="text-red-600 text-sm mt-1" role="alert">{{ errors.name }}</p>
-							</div>
-						</div>
-
-						<!-- 第二行：聯絡電話 / 聯絡信箱 -->
-						<div class="grid grid-cols-2 gap-4">
-							<div>
-								<label for="phone" class="block text-sm font-medium text-gray-700 mb-2"> 聯絡電話 <span class="text-red-500">*</span> </label>
-								<input
-									id="phone"
-									v-model="state.phone"
-									@input="clearError('phone')"
-									type="tel"
-									placeholder="請輸入聯絡電話"
-									:aria-invalid="!!errors.phone"
-									:aria-describedby="errors.phone ? 'phone-error' : undefined"
-									required
-									:class="[
-										'w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-orange focus:border-transparent transition-colors',
-										errors.phone ? 'border-red-300 bg-red-50' : 'border-gray-300'
-									]"
-								/>
-								<p v-if="errors.phone" id="phone-error" class="text-red-600 text-sm mt-1" role="alert">{{ errors.phone }}</p>
-							</div>
-							<div>
-								<label for="email" class="block text-sm font-medium text-gray-700 mb-2"> 聯絡信箱 <span class="text-red-500">*</span> </label>
-								<input
-									id="email"
-									v-model="state.email"
-									@input="clearError('email')"
-									type="email"
-									placeholder="請輸入聯絡信箱"
-									:aria-invalid="!!errors.email"
-									:aria-describedby="errors.email ? 'email-error' : undefined"
-									required
-									:class="[
-										'w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-orange focus:border-transparent transition-colors',
-										errors.email ? 'border-red-300 bg-red-50' : 'border-gray-300'
-									]"
-								/>
-								<p v-if="errors.email" id="email-error" class="text-red-600 text-sm mt-1" role="alert">{{ errors.email }}</p>
-							</div>
-						</div>
-
-						<!-- 第三行：需求描述 -->
-						<div>
-							<label for="message" class="block text-sm font-medium text-gray-700 mb-2"> 需求描述 </label>
-							<textarea
-								id="message"
-								v-model="state.message"
-								@input="clearError('message')"
-								placeholder="請簡述您的需求..."
-								rows="4"
-								:aria-invalid="!!errors.message"
-								:aria-describedby="errors.message ? 'message-error' : undefined"
-								:class="[
-									'w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-orange focus:border-transparent resize-vertical transition-colors',
-									errors.message ? 'border-red-300 bg-red-50' : 'border-gray-300'
-								]"
-							></textarea>
-							<p v-if="errors.message" id="message-error" class="text-red-600 text-sm mt-1" role="alert">{{ errors.message }}</p>
-						</div>
-
-						<button
-							type="submit"
-							:disabled="isSubmitting"
-							:aria-label="isSubmitting ? '正在送出表單，請稍候' : '送出諮詢表單'"
-							:class="[
-								'w-full font-semibold py-3 px-4 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-orange focus:ring-offset-2 flex items-center justify-center gap-2',
-								isSubmitting ? 'bg-gray-400 text-gray-200 cursor-not-allowed' : 'bg-brand-orange text-white hover:bg-orange-600 hover:shadow-lg'
-							]"
-						>
-							<svg v-if="isSubmitting" class="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24" aria-hidden="true">
-								<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-								<path
-									class="opacity-75"
-									fill="currentColor"
-									d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-								></path>
-							</svg>
-							{{ isSubmitting ? "送出中..." : "送出諮詢" }}
-						</button>
-					</form>
-				</div>
+				<!-- 諮詢表單元件 -->
+				<ContactForm />
 			</div>
 
 			<!-- 公司品牌區塊 + 導航按鈕 -->
-			<div class="bg-white rounded-2xl p-8 pb-4 mb-8 shadow-lg border border-gray-200 company-brand">
-				<div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8 mb-6">
+			<div class="bg-white rounded-2xl p-8 pb-0 md:pb-4 mb-16 md:mb-8 shadow-lg border border-gray-200 company-brand">
+				<div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 md:gap-8 mb-6">
 					<!-- 左側：公司品牌 -->
 					<div class="flex items-center gap-6">
 						<NuxtImg
@@ -263,15 +130,18 @@
 							preload
 						/>
 						<div>
-							<h3 class="text-2xl lg:text-3xl font-extrabold text-gray-900 mb-1">蝶蛹科技</h3>
-							<p class="text-lg text-gray-600 font-medium mb-2">Comeo Technology</p>
-							<p class="text-gray-600 leading-relaxed">專為建商與中端企業 量身打造系統整合與數位化方案</p>
+							<h3 class="text-2xl lg:text-3xl font-extrabold text-gray-900 mb-0 md:mb-1">蝶蛹科技</h3>
+							<p class="text-lg text-gray-600 font-medium mb-0 md:mb-2">Comeo Technology</p>
+							<p class="text-gray-600 leading-relaxed">
+								專為建商與中端企業 <br class="block md:hidden" />
+								量身打造系統整合與數位化方案
+							</p>
 						</div>
 					</div>
 
 					<!-- 右側：導航按鈕 -->
-					<div class="px-8 py-2 rounded-2xl bg-brand-orange/90 backdrop-blur-xl border border-orange-300/50 shadow-lg">
-						<div class="flex gap-4 lg:gap-8">
+					<div class="px-4 md:px-8 py-2 rounded-2xl bg-brand-orange/90 backdrop-blur-xl border border-orange-300/50 shadow-lg">
+						<div class="flex justify-center lg:gap-8 whitespace-nowrap">
 							<a
 								href="#about"
 								@click.prevent="scrollToId('about')"
@@ -308,7 +178,7 @@
 			</div>
 
 			<!-- 版權資訊 -->
-			<div class="text-center py-4 absolute bottom-6 left-0 right-0">
+			<div class="text-center py-4 absolute bottom-2 md:bottom-6 left-0 right-0">
 				<p class="text-gray-600 text-sm">© 2025 Comeo Technology. All rights reserved.</p>
 			</div>
 		</div>
@@ -316,179 +186,90 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref, onMounted, onUnmounted } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import ContactForm from "~/components/ContactForm.vue";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const container = ref<HTMLElement | null>(null);
 let ctx: gsap.Context;
 
-interface ContactState {
-	company: string;
-	name: string;
-	phone: string;
-	email: string;
-	message: string;
-}
-
-interface FormErrors {
-	company?: string;
-	name?: string;
-	phone?: string;
-	email?: string;
-	message?: string;
-}
-
-const state = reactive<ContactState>({
-	company: "",
-	name: "",
-	phone: "",
-	email: "",
-	message: ""
-});
-
-const errors = reactive<FormErrors>({});
-const isSubmitting = ref(false);
-const showSuccessMessage = ref(false);
-
-// 驗證規則
-const validateForm = (): boolean => {
-	// 清除之前的錯誤
-	Object.keys(errors).forEach((key) => {
-		delete errors[key as keyof FormErrors];
-	});
-
-	let isValid = true;
-
-	// 公司名稱驗證
-	if (!state.company.trim()) {
-		errors.company = "請輸入公司名稱";
-		isValid = false;
-	}
-
-	// 聯絡人驗證
-	if (!state.name.trim()) {
-		errors.name = "請輸入聯絡人姓名";
-		isValid = false;
-	}
-
-	// 電話驗證
-	if (!state.phone.trim()) {
-		errors.phone = "請輸入聯絡電話";
-		isValid = false;
-	} else if (!/^[\d\-\+\(\)\s]+$/.test(state.phone)) {
-		errors.phone = "請輸入有效的電話號碼";
-		isValid = false;
-	}
-
-	// 電子郵件驗證
-	if (!state.email.trim()) {
-		errors.email = "請輸入聯絡信箱";
-		isValid = false;
-	} else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(state.email)) {
-		errors.email = "請輸入有效的電子郵件格式";
-		isValid = false;
-	}
-
-	// 需求描述驗證（可選填）
-	// 移除字數限制，讓使用者自由填寫
-
-	return isValid;
-};
-
 const scrollToId = (id: string) => {
 	const el = document.getElementById(id);
 	if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-};
-
-const onSubmit = async () => {
-	// 驗證表單
-	if (!validateForm()) {
-		return;
-	}
-
-	isSubmitting.value = true;
-
-	try {
-		// 呼叫後端 API
-		const result = await $fetch("/api/contact", {
-			method: "POST",
-			body: {
-				company: state.company,
-				name: state.name,
-				phone: state.phone,
-				email: state.email,
-				message: state.message
-			}
-		});
-
-		// 由於 result 的型別為 unknown，需先進行型別斷言或檢查
-		if (typeof result === "object" && result !== null && "success" in result && (result as any).success) {
-			// 顯示成功訊息
-			showSuccessMessage.value = true;
-
-			// 重置表單
-			state.company = "";
-			state.name = "";
-			state.phone = "";
-			state.email = "";
-			state.message = "";
-
-			// 3秒後隱藏成功訊息
-			setTimeout(() => {
-				showSuccessMessage.value = false;
-			}, 3000);
-		}
-	} catch (error: any) {
-		console.error("表單提交失敗:", error);
-
-		// 處理錯誤訊息
-		if (error.data?.message) {
-			alert(`送出失敗：${error.data.message}`);
-		} else {
-			alert("表單送出失敗，請稍後再試");
-		}
-	} finally {
-		isSubmitting.value = false;
-	}
-};
-
-// 清除特定欄位的錯誤
-const clearError = (field: keyof FormErrors) => {
-	if (errors[field]) {
-		delete errors[field];
-	}
 };
 
 onMounted(() => {
 	if (!container.value) return;
 
 	ctx = gsap.context(() => {
-		// Part 1: 聯絡我們 - 從左進入
-		gsap.to(".contact-info", {
-			opacity: 1,
-			x: 0,
-			duration: 1,
-			scrollTrigger: { trigger: ".contact-info", start: "top 80%" }
-		});
+		// 共用的動畫配置
+		const isSmallScreen = window.innerWidth < 1024;
 
-		// Part 2: 諮詢表單 - 從右進入
-		gsap.to(".contact-form", {
-			opacity: 1,
-			x: 0,
-			duration: 1,
-			scrollTrigger: { trigger: ".contact-form", start: "top 80%" }
-		});
+		// Part 1: 聯絡我們 - 從左進入（小螢幕改為從下進入）
+		gsap.fromTo(
+			".contact-info",
+			isSmallScreen
+				? {
+						opacity: 0,
+						x: 0,
+						y: 50
+				  }
+				: {
+						opacity: 0,
+						x: -50,
+						y: 0
+				  },
+			{
+				opacity: 1,
+				x: 0,
+				y: 0,
+				duration: 1,
+				scrollTrigger: { trigger: ".contact-info", start: "top 80%" }
+			}
+		);
+
+		// Part 2: 諮詢表單 - 從右進入（小螢幕改為從下進入）
+		gsap.fromTo(
+			".contact-form",
+			isSmallScreen
+				? {
+						opacity: 0,
+						x: 0,
+						y: 50
+				  }
+				: {
+						opacity: 0,
+						x: 50,
+						y: 0
+				  },
+			{
+				opacity: 1,
+				x: 0,
+				y: 0,
+				duration: 1,
+				scrollTrigger: { trigger: ".contact-form", start: "top 80%" }
+			}
+		);
 
 		// Part 3: 公司品牌區塊 - 由下浮現
-		gsap.to(".company-brand", {
-			opacity: 1,
-			y: 0,
-			duration: 1,
-			scrollTrigger: { trigger: ".company-brand", start: "top 80%" }
-		});
+		gsap.fromTo(
+			".company-brand",
+			{
+				opacity: 0,
+				x: 0,
+				y: 50
+			},
+			{
+				opacity: 1,
+				x: 0,
+				y: 0,
+				duration: 1,
+				scrollTrigger: { trigger: ".company-brand", start: "top 80%" }
+			}
+		);
 	}, container.value);
 });
 
@@ -501,18 +282,9 @@ onUnmounted(() => {
 
 <style scoped>
 /* 防止首次渲染閃爍 - 統一初始狀態 */
-.contact-info {
-	opacity: 0;
-	transform: translateX(-50px);
-}
-
-.contact-form {
-	opacity: 0;
-	transform: translateX(50px);
-}
-
+.contact-info,
+.contact-form,
 .company-brand {
 	opacity: 0;
-	transform: translateY(50px);
 }
 </style>

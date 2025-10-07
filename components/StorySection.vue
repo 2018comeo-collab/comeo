@@ -1,45 +1,80 @@
 <template>
 	<section id="about" ref="container" class="lg:grid lg:grid-cols-12 container mx-auto px-4 lg:px-8 gap-8">
-		<div ref="leftPanel" class="py-24 lg:col-span-7">
+		<div ref="leftPanel" class="py-24 space-y-12 lg:col-span-7">
 			<!-- Part 1: Hero -->
-			<div class="space-y-4 min-h-[40vh] lg:min-h-[80vh] flex flex-col justify-center hero-content">
-				<h1 class="hero-title text-black text-4xl md:text-5xl lg:text-6xl font-black tracking-[0.2em]">
+			<div class="space-y-4 min-h-[60vh] lg:min-h-[80vh] flex flex-col justify-center hero-content">
+				<h1 class="hero-title text-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-[0.1em] md:tracking-[0.2em]">
 					<span class="inline-block hero-title-line1">從蝶繭到展翼</span>
 					<NuxtImg src="/comeo-logo.png" alt="Comeo Logo" class="inline-block w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 hero-logo" />
 					<span class="gradient-text inline-block hero-title-line2">為您打造智慧新境界</span>
 				</h1>
-				<p class="hero-subtitle text-lg md:text-xl lg:text-2xl tracking-[0.15em] text-gray-400">以專業技術引領轉變，陪伴企業完成數位蛻變。</p>
+				<p class="hero-subtitle text-xl md:text-2xl lg:text-3xl tracking-[0.15em] text-gray-400">
+					以專業技術引領轉變 <br class="block md:hidden" />陪伴企業完成數位蛻變
+				</p>
 			</div>
 
 			<!-- Part 2: Services -->
 			<div class="space-y-8 min-h-[80vh] flex flex-col justify-center">
 				<header class="text-center services-header">
 					<h2 class="text-3xl md:text-4xl lg:text-5xl font-extrabold">核心服務</h2>
-					<p class="text-lg md:text-xl lg:text-2xl tracking-wide text-gray-400 mt-4">專為建商與中端企業量身打造的系統整合與數位化方案</p>
+					<p class="text-lg md:text-xl lg:text-2xl tracking-wide text-gray-400 mt-4">
+						專為建商與中端企業量身打造的 <br class="block md:hidden" />
+						系統整合與數位化方案
+					</p>
 				</header>
 
-				<div class="grid gap-4 grid-cols-3 service-card-container">
+				<!-- 小螢幕：左右滾動 -->
+				<div class="md:hidden mobile-scroll-container">
+					<div class="flex gap-4 px-4" style="width: max-content">
+						<!-- 系統整合服務 -->
+						<div class="service-card flex-shrink-0 w-64 rounded-xl shadow-lg overflow-hidden" style="background-image: url('/system.png')">
+							<div class="service-overlay"></div>
+							<div class="flex items-end aspect-[2/3] p-4 relative z-10">
+								<h3 class="font-bold text-lg text-white drop-shadow-lg">系統整合服務</h3>
+							</div>
+						</div>
+
+						<!-- AI 安防解決方案 -->
+						<div class="service-card flex-shrink-0 w-64 rounded-xl shadow-lg overflow-hidden" style="background-image: url('/ai-solution.png')">
+							<div class="service-overlay"></div>
+							<div class="flex items-end aspect-[2/3] p-4 relative z-10">
+								<h3 class="font-bold text-lg text-white drop-shadow-lg">AI 安防解決方案</h3>
+							</div>
+						</div>
+
+						<!-- 專案顧問與技術支援 -->
+						<div class="service-card flex-shrink-0 w-64 rounded-xl shadow-lg overflow-hidden" style="background-image: url('/consultation.png')">
+							<div class="service-overlay"></div>
+							<div class="flex items-end aspect-[2/3] p-4 relative z-10">
+								<h3 class="font-bold text-lg text-white drop-shadow-lg">專案顧問與技術支援</h3>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- 中螢幕以上：網格佈局 -->
+				<div class="hidden md:grid gap-4 grid-cols-3">
 					<!-- 系統整合服務 -->
-					<div class="service-card bg-white rounded-xl shadow-lg overflow-hidden" style="background-image: url('/system.png')">
+					<div class="service-card w-full rounded-xl shadow-lg overflow-hidden" style="background-image: url('/system.png')">
 						<div class="service-overlay"></div>
-						<div class="service-content flex items-end aspect-[2/3] p-4 relative z-10">
-							<h3 class="font-bold text-base md:text-lg lg:text-xl text-white drop-shadow-lg">系統整合服務</h3>
+						<div class="flex items-end aspect-[2/3] p-4 relative z-10">
+							<h3 class="font-bold text-base lg:text-xl text-white drop-shadow-lg">系統整合服務</h3>
 						</div>
 					</div>
 
 					<!-- AI 安防解決方案 -->
-					<div class="service-card bg-white rounded-xl shadow-lg overflow-hidden" style="background-image: url('/ai-solution.png')">
+					<div class="service-card w-full rounded-xl shadow-lg overflow-hidden" style="background-image: url('/ai-solution.png')">
 						<div class="service-overlay"></div>
-						<div class="service-content flex items-end aspect-[2/3] p-4 relative z-10">
-							<h3 class="font-bold text-base md:text-lg lg:text-xl text-white drop-shadow-lg">AI 安防解決方案</h3>
+						<div class="flex items-end aspect-[2/3] p-4 relative z-10">
+							<h3 class="font-bold text-base lg:text-xl text-white drop-shadow-lg">AI 安防解決方案</h3>
 						</div>
 					</div>
 
 					<!-- 專案顧問與技術支援 -->
-					<div class="service-card bg-white rounded-xl shadow-lg overflow-hidden" style="background-image: url('/consultation.png')">
+					<div class="service-card w-full rounded-xl shadow-lg overflow-hidden" style="background-image: url('/consultation.png')">
 						<div class="service-overlay"></div>
-						<div class="service-content flex items-end aspect-[2/3] p-4 relative z-10">
-							<h3 class="font-bold text-base md:text-lg lg:text-xl text-white drop-shadow-lg">專案顧問與技術支援</h3>
+						<div class="flex items-end aspect-[2/3] p-4 relative z-10">
+							<h3 class="font-bold text-base lg:text-xl text-white drop-shadow-lg">專案顧問與技術支援</h3>
 						</div>
 					</div>
 				</div>
@@ -187,6 +222,21 @@ onUnmounted(() => {
 	bottom: 0;
 	background: linear-gradient(to bottom, rgba(0, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.2) 40%, rgba(255, 0, 0, 0.2) 100%);
 	border-radius: 0.75rem;
+}
+
+/* 小螢幕滾動容器樣式 - 隱藏滾動軸 */
+.mobile-scroll-container {
+	overflow-x: auto;
+	overflow-y: hidden;
+	padding-bottom: 1rem;
+	/* 隱藏滾動軸 */
+	scrollbar-width: none; /* Firefox */
+	-ms-overflow-style: none; /* IE and Edge */
+	scroll-behavior: smooth;
+}
+
+.mobile-scroll-container::-webkit-scrollbar {
+	display: none; /* Chrome, Safari, Opera */
 }
 
 /* 防止首次渲染閃爍 - 統一初始狀態 */

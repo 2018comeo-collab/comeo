@@ -1,2 +1,0 @@
-# comeo
-comeo frontend
