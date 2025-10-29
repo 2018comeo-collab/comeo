@@ -246,7 +246,7 @@ const projects = computed(() => {
 				coverImageUrl: caseStudy.coverImageUrl
 					? caseStudy.coverImageUrl.startsWith("http")
 						? caseStudy.coverImageUrl
-						: `${useRuntimeConfig().public.apiBaseUrl || "/api"}${caseStudy.coverImageUrl}`
+						: `${useRuntimeConfig().public.apiBaseUrl}${caseStudy.coverImageUrl}`
 					: null
 			};
 			return processedProject;

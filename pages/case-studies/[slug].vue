@@ -277,7 +277,7 @@ const formatDate = (dateString: string) => {
 const getImageUrl = (imageUrl: string) => {
 	if (!imageUrl) return "";
 	if (imageUrl.startsWith("http")) return imageUrl;
-	return `${useRuntimeConfig().public.apiBaseUrl || "/api"}${imageUrl}`;
+	return `${useRuntimeConfig().public.apiBaseUrl}${imageUrl}`;
 };
 
 // 組件掛載時載入案例詳情
