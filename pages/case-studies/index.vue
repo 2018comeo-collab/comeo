@@ -546,7 +546,7 @@ const getVisiblePages = () => {
 const getImageUrl = (imageUrl) => {
 	if (!imageUrl) return "";
 	if (imageUrl.startsWith("http")) return imageUrl;
-	return `${useRuntimeConfig().public.apiBaseUrl || "http://192.168.1.3:3000"}${imageUrl}`;
+	return `${useRuntimeConfig().public.apiBaseUrl || "/api"}${imageUrl}`;
 };
 
 // 處理圖片載入錯誤

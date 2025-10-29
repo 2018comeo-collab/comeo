@@ -24,7 +24,7 @@ export const useApi = () => {
 	// 建立基礎 API 實例
 	const createApiInstance = (baseURL?: string): AxiosInstance => {
 		return axios.create({
-			baseURL: baseURL || config.public.apiBaseUrl || "https://api.comeo.com",
+			baseURL: baseURL || config.public.apiBaseUrl || "/api",
 			timeout: 10000,
 			headers: {
 				"Content-Type": "application/json"

@@ -15,9 +15,9 @@ export default defineNuxtConfig({
 
 		// 公開變數 (客戶端和服務端都可存取)
 		public: {
-			apiBaseUrl: process.env.API_BASE_URL || "http://192.168.1.3:3000",
+			apiBaseUrl: process.env.API_BASE_URL || "/api",
 			storagePath: process.env.STORAGE_PATH || "/storage",
-			fileServiceBaseUrl: process.env.NUXT_PUBLIC_FILE_SERVICE_BASE_URL || "http://192.168.1.3:3000"
+			fileServiceBaseUrl: process.env.NUXT_PUBLIC_FILE_SERVICE_BASE_URL || "https://api.comeo.com.tw"
 		}
 	},
 

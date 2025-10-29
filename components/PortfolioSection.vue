@@ -246,7 +246,7 @@ const projects = computed(() => {
 				coverImageUrl: caseStudy.coverImageUrl
 					? caseStudy.coverImageUrl.startsWith("http")
 						? caseStudy.coverImageUrl
-						: `${useRuntimeConfig().public.apiBaseUrl || "http://192.168.1.3:3000"}${caseStudy.coverImageUrl}`
+						: `${useRuntimeConfig().public.apiBaseUrl || "/api"}${caseStudy.coverImageUrl}`
 					: null
 			};
 			return processedProject;
