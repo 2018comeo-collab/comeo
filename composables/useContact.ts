@@ -59,7 +59,7 @@ export const useContact = () => {
 			// 發送請求
 			const response = await safeApiCall<ContactResponse>(
 				() =>
-					api.post("/api/contact", formDataObj, {
+					api.post("/contact", formDataObj, {
 						headers: {
 							"Content-Type": "multipart/form-data"
 						}
@@ -232,7 +232,7 @@ export const useContact = () => {
 			// 發送請求，添加 x-app-context header
 			const response = await safeApiCall<ContactResponse>(
 				() =>
-					api.post("/api/contact", formDataObj, {
+					api.post("/contact", formDataObj, {
 						headers: {
 							"Content-Type": "multipart/form-data",
 							"x-app-context": siteType

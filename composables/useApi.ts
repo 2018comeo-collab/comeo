@@ -141,7 +141,7 @@ export const useApi = () => {
 			 * 獲取所有項目
 			 */
 			getAll: async (params: Record<string, any> = {}) => {
-				const response = await safeApiCall<any>(() => instance.get(`/api/${entityType}`, { params }));
+				const response = await safeApiCall<any>(() => instance.get(`/${entityType}`, { params }));
 				// 如果設定了 responseKey，則使用該鍵名，否則使用預設的 items
 				if (responseKey && response[responseKey]) {
 					return {
@@ -156,21 +156,21 @@ export const useApi = () => {
 			 * 根據 ID 獲取單個項目
 			 */
 			getById: async (id: string | number, params: Record<string, any> = {}) => {
-				return safeApiCall<T>(() => instance.get(`/api/${entityType}/${id}`, { params }));
+				return safeApiCall<T>(() => instance.get(`/${entityType}/${id}`, { params }));
 			},
 
 			/**
 			 * 根據 slug 獲取單個項目
 			 */
 			getBySlug: async (slug: string, params: Record<string, any> = {}) => {
-				return safeApiCall<T>(() => instance.get(`/api/${entityType}/slug/${slug}`, { params }));
+				return safeApiCall<T>(() => instance.get(`/${entityType}/slug/${slug}`, { params }));
 			},
 
 			/**
 			 * 搜索項目
 			 */
 			search: async (searchParams: Record<string, any> = {}) => {
-				return safeApiCall<{ items: T[]; pagination?: any }>(() => instance.get(`/api/${entityType}/search`, { params: searchParams }));
+				return safeApiCall<{ items: T[]; pagination?: any }>(() => instance.get(`/${entityType}/search`, { params: searchParams }));
 			},
 
 			/**
@@ -198,7 +198,7 @@ export const useApi = () => {
 			}
 
 			return safeApiCall<{ url: string; filename: string }>(() =>
-				apiAuth.post("/api/files/upload", formData, {
+				apiAuth.post("/files/upload", formData, {
 					headers: {
 						"Content-Type": "multipart/form-data"
 					}

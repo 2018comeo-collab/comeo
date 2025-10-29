@@ -147,7 +147,7 @@ export const useCaseStudyStore = defineStore("caseStudy", () => {
 				...params,
 				isActive: true // 確保搜尋結果只包含啟用的案例
 			};
-			const result: any = await http.get("/api/case-studies/search", { params: searchParams });
+			const result: any = await http.get("/case-studies/search", { params: searchParams });
 
 			// 只有成功獲取資料後才更新
 			const newItems = result.caseStudies || result.items || [];
