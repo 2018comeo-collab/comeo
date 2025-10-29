@@ -60,7 +60,8 @@ export const useApi = () => {
 	 */
 	const handleResponse = <T>(response: AxiosResponse<ApiResponse<T>>): T => {
 		if (response.data?.success) {
-			return response.data.result;
+			// 如果 API 回應有 result 欄位，使用它；否則直接返回整個 data
+			return (response.data.result || response.data) as T;
 		}
 		throw new Error(response.data?.message || "API 請求失敗");
 	};
@@ -140,7 +141,15 @@ export const useApi = () => {
 			 * 獲取所有項目
 			 */
 			getAll: async (params: Record<string, any> = {}) => {
-				return safeApiCall<{ items: T[]; pagination?: any }>(() => instance.get(`/api/${entityType}`, { params }));
+				const response = await safeApiCall<any>(() => instance.get(`/api/${entityType}`, { params }));
+				// 如果設定了 responseKey，則使用該鍵名，否則使用預設的 items
+				if (responseKey && response[responseKey]) {
+					return {
+						items: response[responseKey],
+						pagination: response.pagination
+					};
+				}
+				return response;
 			},
 
 			/**

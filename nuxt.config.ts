@@ -15,9 +15,9 @@ export default defineNuxtConfig({
 
 		// 公開變數 (客戶端和服務端都可存取)
 		public: {
-			apiBaseUrl: process.env.API_BASE_URL || "https://api.comeo.com.tw",
+			apiBaseUrl: process.env.API_BASE_URL || "http://192.168.1.3:3000",
 			storagePath: process.env.STORAGE_PATH || "/storage",
-			fileServiceBaseUrl: process.env.NUXT_PUBLIC_FILE_SERVICE_BASE_URL || "https://api.comeo.com.tw"
+			fileServiceBaseUrl: process.env.NUXT_PUBLIC_FILE_SERVICE_BASE_URL || "http://192.168.1.3:3000"
 		}
 	},
 
@@ -45,6 +45,15 @@ export default defineNuxtConfig({
 				{ rel: "preconnect", href: "https://fonts.googleapis.com" },
 				{ rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: "" }
 			]
+		},
+		// 頁面轉場配置
+		pageTransition: {
+			name: "page",
+			mode: "out-in"
+		},
+		layoutTransition: {
+			name: "layout",
+			mode: "out-in"
 		}
 	},
 	// 開發伺服器設定 - 允許外部設備連接

@@ -1,3 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+	/* 優化頁面切換的視覺效果 */
+	html {
+		scroll-behavior: smooth;
+	}
+
+	/* 防止頁面切換時的閃爍 */
+	body {
+		@apply antialiased;
+	}
+}
+
+@layer utilities {
+	/* 頁面切換時防止內容跳動 */
+	.page-transition-wrapper {
+		@apply min-h-screen;
+	}
+}

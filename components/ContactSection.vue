@@ -143,31 +143,13 @@
 					<div class="px-4 md:px-8 py-2 rounded-2xl bg-brand-orange/90 backdrop-blur-xl border border-orange-300/50 shadow-lg">
 						<div class="flex justify-center lg:gap-8 whitespace-nowrap">
 							<a
-								href="#about"
-								@click.prevent="scrollToId('about')"
+								v-for="link in navLinks"
+								:key="link.id"
+								:href="`#${link.id}`"
+								@click.prevent="scrollToId(link.id)"
 								class="text-white font-semibold text-base lg:text-lg px-4 py-2 rounded-lg transition-all duration-300 hover:text-yellow-200 hover:-translate-y-0.5 relative group"
 							>
-								關於蝶蛹
-								<span
-									class="absolute bottom-1 left-1/2 w-0 h-0.5 bg-yellow-200 rounded-full transition-all duration-300 transform -translate-x-1/2 group-hover:w-3/5"
-								></span>
-							</a>
-							<a
-								href="#partners"
-								@click.prevent="scrollToId('partners')"
-								class="text-white font-semibold text-base lg:text-lg px-4 py-2 rounded-lg transition-all duration-300 hover:text-yellow-200 hover:-translate-y-0.5 relative group"
-							>
-								合作夥伴
-								<span
-									class="absolute bottom-1 left-1/2 w-0 h-0.5 bg-yellow-200 rounded-full transition-all duration-300 transform -translate-x-1/2 group-hover:w-3/5"
-								></span>
-							</a>
-							<a
-								href="#portfolio"
-								@click.prevent="scrollToId('portfolio')"
-								class="text-white font-semibold text-base lg:text-lg px-4 py-2 rounded-lg transition-all duration-300 hover:text-yellow-200 hover:-translate-y-0.5 relative group"
-							>
-								實績案例
+								{{ link.label }}
 								<span
 									class="absolute bottom-1 left-1/2 w-0 h-0.5 bg-yellow-200 rounded-full transition-all duration-300 transform -translate-x-1/2 group-hover:w-3/5"
 								></span>
@@ -195,6 +177,13 @@ gsap.registerPlugin(ScrollTrigger);
 
 const container = ref<HTMLElement | null>(null);
 let ctx: gsap.Context;
+
+// 導航連結配置（與 default.vue 保持一致）
+const navLinks = [
+	{ id: "about", label: "關於蝶蛹" },
+	{ id: "partners", label: "合作夥伴" },
+	{ id: "portfolio", label: "實績案例" }
+];
 
 const scrollToId = (id: string) => {
 	const el = document.getElementById(id);

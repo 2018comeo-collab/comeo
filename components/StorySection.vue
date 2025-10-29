@@ -1,6 +1,6 @@
 <template>
 	<section id="about" ref="container" class="lg:grid lg:grid-cols-12 container mx-auto px-4 lg:px-8 gap-8">
-		<div ref="leftPanel" class="py-24 space-y-12 lg:col-span-7">
+		<div ref="leftPanel" class="pt-32 pb-24 space-y-12 lg:col-span-7">
 			<!-- Part 1: Hero -->
 			<div class="space-y-4 min-h-[60vh] lg:min-h-[80vh] flex flex-col justify-center hero-content">
 				<h1 class="hero-title text-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-[0.1em] md:tracking-[0.2em]">

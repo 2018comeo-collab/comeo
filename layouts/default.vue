@@ -20,7 +20,7 @@
 		<nav class="fixed top-0 left-0 right-0 z-50 py-4 transition-transform duration-300" :class="{ '-translate-y-full': isHidden }">
 			<div class="container mx-auto px-4 py-2 flex items-center justify-between gap-8">
 				<!-- Logo + Company 區塊 -->
-				<div class="flex items-center cursor-pointer" @click="scrollToId('top')">
+				<div class="flex items-center cursor-pointer" @click="handleLogoClick">
 					<NuxtImg
 						src="/comeo-logo.png"
 						alt="蝶蛹科技 Logo"
@@ -39,39 +39,18 @@
 				</div>
 
 				<!-- Navigation 區塊 -->
-				<div class="absolute left-1/2 -translate-x-1/2 hidden md:flex justify-center items-center">
+				<div v-if="!hideNavLinks" class="absolute left-1/2 -translate-x-1/2 hidden md:flex justify-center items-center">
 					<!-- nav backdrop -->
 					<div class="px-8 py-2 rounded-2xl bg-white/30 backdrop-blur-xl border border-white/20 shadow-lg">
 						<div class="flex gap-4 lg:gap-8">
-							<!-- 關於蝶蛹 -->
 							<a
-								href="#about"
-								@click.prevent="scrollToId('about')"
+								v-for="link in navLinks"
+								:key="link.id"
+								:href="`#${link.id}`"
+								@click.prevent="scrollToId(link.id)"
 								class="text-gray-900 font-semibold text-base lg:text-lg xl:text-xl px-4 py-2 rounded-lg transition-all duration-300 hover:text-orange-500 hover:-translate-y-0.5 relative group"
 							>
-								關於蝶蛹
-								<span
-									class="absolute bottom-1 left-1/2 w-0 h-0.5 bg-orange-500 rounded-full transition-all duration-300 transform -translate-x-1/2 group-hover:w-3/5"
-								></span>
-							</a>
-							<!-- 合作夥伴 -->
-							<a
-								href="#partners"
-								@click.prevent="scrollToId('partners')"
-								class="text-gray-900 font-semibold text-base lg:text-lg xl:text-xl px-4 py-2 rounded-lg transition-all duration-300 hover:text-orange-500 hover:-translate-y-0.5 relative group"
-							>
-								合作夥伴
-								<span
-									class="absolute bottom-1 left-1/2 w-0 h-0.5 bg-orange-500 rounded-full transition-all duration-300 transform -translate-x-1/2 group-hover:w-3/5"
-								></span>
-							</a>
-							<!-- 實績案例 -->
-							<a
-								href="#portfolio"
-								@click.prevent="scrollToId('portfolio')"
-								class="text-gray-900 font-semibold text-base lg:text-lg xl:text-xl px-4 py-2 rounded-lg transition-all duration-300 hover:text-orange-500 hover:-translate-y-0.5 relative group"
-							>
-								實績案例
+								{{ link.label }}
 								<span
 									class="absolute bottom-1 left-1/2 w-0 h-0.5 bg-orange-500 rounded-full transition-all duration-300 transform -translate-x-1/2 group-hover:w-3/5"
 								></span>
@@ -113,13 +92,40 @@
 		</nav>
 
 		<NuxtPage />
+
+		<!-- 全局聯絡區塊 -->
+		<ContactSection />
 	</div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref, computed, onMounted, onUnmounted } from "vue";
+
+// 獲取頁面元數據來判斷是否隱藏導覽連結
+const route = useRoute();
+const router = useRouter();
+const hideNavLinks = computed(() => {
+	return route.meta?.hideNavLinks === true;
+});
+
+// 導航連結配置
+const navLinks = [
+	{ id: "about", label: "關於蝶蛹" },
+	{ id: "partners", label: "合作夥伴" },
+	{ id: "portfolio", label: "實績案例" }
+];
 
 const isHidden = ref(false);
+const lastScrollY = ref(0);
+const scrollThreshold = 10; // 滾動閾值，避免微小滾動觸發
+
+const handleLogoClick = () => {
+	if (route.path === "/") {
+		scrollToId("top");
+	} else {
+		router.push("/");
+	}
+};
 
 const scrollToId = (id: string) => {
 	const el = document.getElementById(id);
@@ -127,18 +133,49 @@ const scrollToId = (id: string) => {
 };
 
 const handleScroll = () => {
-	const footer = document.getElementById("contact");
-	if (!footer) return;
+	const currentScrollY = window.scrollY;
+	let shouldHide = isHidden.value;
+	let shouldUpdateScroll = false;
 
-	const footerRect = footer.getBoundingClientRect();
-	const windowHeight = window.innerHeight;
+	// 如果在頂部（少於 100px），總是顯示導航列
+	if (currentScrollY < 100) {
+		shouldHide = false;
+		shouldUpdateScroll = true;
+	}
+	// 檢查是否到達 footer，優先級最高
+	else {
+		const footer = document.getElementById("contact");
+		if (footer) {
+			const footerRect = footer.getBoundingClientRect();
+			const windowHeight = window.innerHeight;
 
-	// 當 footer 頂部進入視窗範圍時隱藏導航列
-	isHidden.value = footerRect.top <= windowHeight * 0.1;
+			// 當 footer 頂部進入視窗範圍時隱藏導航列
+			if (footerRect.top <= windowHeight * 0.1) {
+				shouldHide = true;
+				shouldUpdateScroll = true;
+			} else {
+				// 計算滾動方向
+				const scrollDiff = currentScrollY - lastScrollY.value;
+
+				// 只有當滾動超過閾值時才改變狀態
+				if (Math.abs(scrollDiff) > scrollThreshold) {
+					shouldHide = scrollDiff > 0; // 向下滾動隱藏，向上滾動顯示
+					shouldUpdateScroll = true;
+				}
+			}
+		}
+	}
+
+	// 統一更新狀態
+	if (shouldUpdateScroll) {
+		isHidden.value = shouldHide;
+		lastScrollY.value = currentScrollY;
+	}
 };
 
 onMounted(() => {
-	window.addEventListener("scroll", handleScroll);
+	lastScrollY.value = window.scrollY;
+	window.addEventListener("scroll", handleScroll, { passive: true });
 	handleScroll(); // 初始檢查
 });
 

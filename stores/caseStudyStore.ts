@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
-import { useApi } from "~/composables/useApi";
+import { useApi } from "../composables/useApi";
 
 export const useCaseStudyStore = defineStore("caseStudy", () => {
 	const { entityApi, http } = useApi();
@@ -26,9 +26,21 @@ export const useCaseStudyStore = defineStore("caseStudy", () => {
 		isLoading.value = true;
 		error.value = null;
 		try {
+			// 確保只獲取啟用的案例研究
+			const queryParams = {
+				...params,
+				isActive: true // 明確指定只獲取啟用的案例
+			};
+
 			// 後端列表 API：自帶權限過濾（公開只返回 isActive=true）
-			const result = await caseStudyService.getAll(params);
-			caseStudyList.value = result.items || [];
+			const result = await caseStudyService.getAll(queryParams);
+			console.log("API 返回的完整結果:", result);
+
+			// 處理不同的資料結構：優先使用 caseStudies，其次使用 items
+			const items = result.caseStudies || result.items || [];
+			console.log("處理後的資料:", items);
+			caseStudyList.value = items;
+
 			if (result.pagination) {
 				pagination.value = {
 					page: result.pagination.current || result.pagination.page || pagination.value.page,
@@ -37,6 +49,8 @@ export const useCaseStudyStore = defineStore("caseStudy", () => {
 					pages: result.pagination.total || result.pagination.pages || pagination.value.pages
 				};
 			}
+			console.log("最終的 caseStudyList:", caseStudyList.value);
+			console.log("最終的 pagination:", pagination.value);
 		} catch (e: any) {
 			error.value = e.message || "無法獲取案例研究列表";
 			caseStudyList.value = [];
@@ -55,14 +69,32 @@ export const useCaseStudyStore = defineStore("caseStudy", () => {
 		isLoading.value = true;
 		error.value = null;
 		try {
+			// 確保只獲取啟用的案例研究
+			const queryParams = {
+				...params,
+				isActive: true // 明確指定只獲取啟用的案例
+			};
+
 			// 使用標準化的 getBySlug 方法
-			const result = await caseStudyService.getBySlug(slug, params);
+			const result = await caseStudyService.getBySlug(slug, queryParams);
+
 			if (!result) {
 				throw new Error("獲取案例研究詳情失敗：找不到項目");
 			}
-			currentCaseStudy.value = result;
+
+			// 處理不同的資料結構
+			// 後端可能返回 { caseStudy: {...} } 或直接返回案例物件
+			const caseStudyData = result.caseStudy || result;
+
+			// 額外檢查案例是否啟用（雙重保護）
+			if (caseStudyData && caseStudyData.isActive === false) {
+				throw new Error("此案例研究目前不可用");
+			}
+
+			currentCaseStudy.value = caseStudyData;
 			return currentCaseStudy.value;
 		} catch (e: any) {
+			console.error("獲取案例詳情失敗:", e);
 			error.value = e.message || "獲取案例研究詳情時發生錯誤";
 			currentCaseStudy.value = null; // 確保出錯時清空
 			throw e;
@@ -80,7 +112,13 @@ export const useCaseStudyStore = defineStore("caseStudy", () => {
 		isLoading.value = true;
 		error.value = null;
 		try {
-			const result: any = await http.get(`/api/case-studies/project-type/${projectType}`, { params });
+			// 確保只獲取啟用的案例研究
+			const queryParams = {
+				...params,
+				isActive: true // 明確指定只獲取啟用的案例
+			};
+
+			const result: any = await http.get(`/api/case-studies/project-type/${projectType}`, { params: queryParams });
 			return result.caseStudies || [];
 		} catch (e: any) {
 			error.value = e.message || "獲取專案類型案例研究失敗";
@@ -98,20 +136,48 @@ export const useCaseStudyStore = defineStore("caseStudy", () => {
 	async function searchCaseStudies(searchTerm: string, params = {}) {
 		isLoading.value = true;
 		error.value = null;
+
+		// 保留舊資料，直到新資料載入完成（避免閃爍）
+		const previousData = [...caseStudyList.value];
+		const previousPagination = { ...pagination.value };
+
 		try {
 			const searchParams = {
 				q: searchTerm,
-				...params
+				...params,
+				isActive: true // 確保搜尋結果只包含啟用的案例
 			};
 			const result: any = await http.get("/api/case-studies/search", { params: searchParams });
 
+			// 只有成功獲取資料後才更新
+			const newItems = result.caseStudies || result.items || [];
+
+			// 更新案例列表
+			caseStudyList.value = newItems;
+
+			// 更新分頁資訊
+			if (result.pagination) {
+				pagination.value = {
+					page: result.pagination.current || result.pagination.page || 1,
+					limit: result.pagination.limit || 12,
+					total: result.pagination.count || result.pagination.total || 0,
+					pages: result.pagination.total || result.pagination.pages || 1
+				};
+			}
+
 			return {
-				items: result.caseStudies || [],
+				items: newItems,
 				pagination: result.pagination || null,
 				searchTerm: result.searchTerm || searchTerm
 			};
 		} catch (e: any) {
+			console.error("搜尋錯誤詳情:", e);
 			error.value = e.message || "搜尋案例研究失敗";
+
+			// 發生錯誤時，恢復之前的資料（而不是清空）
+			caseStudyList.value = previousData;
+			pagination.value = previousPagination;
+
 			throw e;
 		} finally {
 			isLoading.value = false;
