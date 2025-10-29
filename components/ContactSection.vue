@@ -1,7 +1,7 @@
 <template>
 	<footer id="contact" ref="container" class="min-h-screen flex justify-center items-center relative">
 		<div class="container mx-auto px-4">
-			<div class="grid gap-8 grid-cols-1 lg:grid-cols-2 mb-8">
+			<div class="grid gap-8 grid-cols-1 lg:grid-cols-2 my-8">
 				<!-- 聯絡我們 -->
 				<div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-200 contact-info">
 					<h4 class="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
@@ -42,10 +42,10 @@
 							</div>
 							<div>
 								<p class="text-base text-gray-600">Email</p>
-								<a href="mailto:stan@comeo.com.tw" class="font-bold text-gray-900 text-xl hover:text-brand-orange transition-colors">stan@comeo.com.tw</a>
-								<a href="mailto:jerry@comeo.com.tw" class="ms-4 font-bold text-gray-900 text-xl hover:text-brand-orange transition-colors"
-									>jerry@comeo.com.tw</a
-								>
+								<div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+									<a href="mailto:stan@comeo.com.tw" class="font-bold text-gray-900 text-xl hover:text-brand-orange transition-colors">stan@comeo.com.tw</a>
+									<a href="mailto:jerry@comeo.com.tw" class="font-bold text-gray-900 text-xl hover:text-brand-orange transition-colors">jerry@comeo.com.tw</a>
+								</div>
 							</div>
 						</div>
 
@@ -176,6 +176,8 @@ import ContactForm from "~/components/ContactForm.vue";
 gsap.registerPlugin(ScrollTrigger);
 
 const container = ref<HTMLElement | null>(null);
+const route = useRoute();
+const router = useRouter();
 let ctx: gsap.Context;
 
 // 導航連結配置（與 default.vue 保持一致）
@@ -186,8 +188,14 @@ const navLinks = [
 ];
 
 const scrollToId = (id: string) => {
-	const el = document.getElementById(id);
-	if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+	// 如果在首頁，直接滾動到對應元素
+	if (route.path === "/") {
+		const el = document.getElementById(id);
+		if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+	} else {
+		// 如果不在首頁，使用 Nuxt 路由跳轉到首頁對應區塊
+		router.push(`/#${id}`);
+	}
 };
 
 onMounted(() => {

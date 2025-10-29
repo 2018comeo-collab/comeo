@@ -128,8 +128,14 @@ const handleLogoClick = () => {
 };
 
 const scrollToId = (id: string) => {
-	const el = document.getElementById(id);
-	if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+	// 如果在首頁，直接滾動到對應元素
+	if (route.path === "/") {
+		const el = document.getElementById(id);
+		if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+	} else {
+		// 如果不在首頁，先跳轉到首頁，然後滾動到對應元素
+		router.push(`/#${id}`);
+	}
 };
 
 const handleScroll = () => {

@@ -129,43 +129,13 @@
 			</div>
 
 			<!-- 更多案例按鈕 -->
-			<div v-if="filteredProjects.length > 0" class="text-center mt-4 md:mt-8">
+			<div v-if="filteredProjects.length > 0" class="text-center mt-4 md:mt-8 more-cases-button">
 				<NuxtLink
 					to="/case-studies"
 					class="inline-block bg-white text-brand-orange font-semibold px-8 py-4 rounded-2xl border-2 border-brand-orange hover:bg-brand-orange hover:text-white transition-all duration-300 shadow-lg"
 				>
 					查看更多案例
 				</NuxtLink>
-			</div>
-		</div>
-
-		<!-- 專案詳情模態框 -->
-		<div v-if="selectedProject" class="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50" @click="closeProjectModal">
-			<div class="bg-white rounded-2xl max-w-2xl w-full max-h-[80vh] overflow-y-auto" @click.stop>
-				<div class="p-6">
-					<div class="flex justify-between items-start mb-4">
-						<h3 class="text-2xl font-bold text-gray-900">{{ selectedProject.title }}</h3>
-						<button @click="closeProjectModal" class="text-gray-500 hover:text-gray-700 transition-colors">
-							<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-							</svg>
-						</button>
-					</div>
-
-					<div class="space-y-4">
-						<div>
-							<h4 class="font-semibold text-gray-900 mb-2">專案概述</h4>
-							<p class="text-gray-600">{{ selectedProject.fullDescription }}</p>
-						</div>
-
-						<div>
-							<h4 class="font-semibold text-gray-900 mb-2">解決方案</h4>
-							<ul class="list-disc list-inside text-gray-600 space-y-1">
-								<li v-for="solution in selectedProject.solutions" :key="solution">{{ solution }}</li>
-							</ul>
-						</div>
-					</div>
-				</div>
 			</div>
 		</div>
 	</section>
@@ -206,7 +176,6 @@ interface Category {
 }
 
 const activeCategory = ref("all");
-const selectedProject = ref<Project | null>(null);
 const hasAnimated = ref(false);
 
 // 所有可能的分類選項
@@ -284,14 +253,6 @@ watch(activeCategory, (newCategory) => {
 		}
 	});
 });
-
-const openProjectModal = (project: Project) => {
-	selectedProject.value = project;
-};
-
-const closeProjectModal = () => {
-	selectedProject.value = null;
-};
 
 // 處理圖片載入錯誤
 const handleImageError = (event: Event) => {
@@ -380,6 +341,17 @@ onMounted(async () => {
 				hasAnimated.value = true;
 			}
 		});
+
+		// Part 4: 更多案例按鈕動畫
+		const moreButtonTimeline = gsap.timeline({
+			scrollTrigger: { trigger: ".more-cases-button", start: "top 80%" }
+		});
+
+		moreButtonTimeline.to(".more-cases-button", {
+			opacity: 1,
+			y: 0,
+			duration: 1
+		});
 	}, container.value);
 });
 
@@ -400,7 +372,8 @@ onUnmounted(() => {
 
 /* 防止首次渲染閃爍 - 統一初始狀態 */
 header,
-.flex.justify-center {
+.flex.justify-center,
+.more-cases-button {
 	opacity: 0;
 	transform: translateY(50px);
 }

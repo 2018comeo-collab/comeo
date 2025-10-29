@@ -1,25 +1,25 @@
 <template>
 	<div class="min-h-screen bg-gray-50">
 		<!-- 頁面標題 -->
-		<section class="bg-white pt-24 md:pt-28 pb-16 border-b">
-			<div class="container mx-auto px-4">
-				<h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-center text-gray-900 mb-4">實績案例</h1>
-				<p class="text-lg md:text-xl text-center text-gray-600 max-w-2xl mx-auto">成功案例見證我們的專業實力</p>
+		<section class="bg-white pt-28 pb-12 sm:pb-16 border-b">
+			<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+				<h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-center text-gray-900 mb-3 sm:mb-4">實績案例</h1>
+				<p class="text-base sm:text-lg md:text-xl text-center text-gray-600 max-w-2xl mx-auto leading-relaxed">成功案例見證我們的專業實力</p>
 			</div>
 		</section>
 
 		<!-- 搜尋和篩選 -->
-		<section class="py-8 bg-white border-b">
-			<div class="container mx-auto px-4">
-				<div class="flex flex-col md:flex-row gap-4 items-center justify-between">
+		<section class="py-6 sm:py-8">
+			<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+				<div class="flex flex-col lg:flex-row gap-4 sm:gap-6 items-center justify-between">
 					<!-- 搜尋框 -->
-					<div class="flex-1 max-w-md">
+					<div class="w-full lg:flex-1">
 						<div class="relative">
 							<input
 								v-model="searchQuery"
 								type="text"
 								placeholder="搜尋案例研究..."
-								class="w-full px-4 py-2 pl-10 pr-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-brand-orange transition-all"
+								class="w-full px-4 py-3 pl-10 pr-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-orange focus:border-brand-orange transition-all text-sm sm:text-base"
 								@input="handleSearch"
 								@keyup.enter="handleSearch"
 							/>
@@ -55,13 +55,13 @@
 					</div>
 
 					<!-- 專案類型篩選 -->
-					<div class="bg-white rounded-2xl p-2 shadow-lg border border-gray-200 inline-flex gap-2 flex-wrap">
+					<div class="w-auto bg-white rounded-2xl p-2 shadow-lg border border-gray-200 inline-flex gap-1 sm:gap-2 flex-wrap justify-center lg:justify-start">
 						<button
 							v-for="type in projectTypes"
 							:key="type"
 							@click="selectProjectType(type)"
 							:class="[
-								'px-6 py-3 rounded-xl font-semibold transition-all duration-300',
+								'px-3 sm:px-4 lg:px-6 py-2 sm:py-3 rounded-xl font-semibold transition-all duration-300 text-sm sm:text-base whitespace-nowrap',
 								selectedProjectType === type ? 'bg-brand-orange text-white shadow-md' : 'text-gray-600 hover:text-brand-orange hover:bg-orange-50'
 							]"
 						>
@@ -73,32 +73,35 @@
 		</section>
 
 		<!-- 案例研究列表 -->
-		<section class="py-12">
-			<div class="container mx-auto px-4">
+		<section class="py-6 sm:py-8">
+			<div class="container mx-auto px-4 sm:px-6 lg:px-8">
 				<!-- 載入骨架屏 - 首次載入或延遲載入時顯示 -->
-				<div v-if="(isLoading || showLoadingDelay) && filteredCaseStudyList.length === 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+				<div
+					v-if="(isLoading || showLoadingDelay) && filteredCaseStudyList.length === 0"
+					class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8"
+				>
 					<div v-for="n in 6" :key="n" class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden animate-pulse">
 						<!-- 骨架圖片 -->
 						<div class="aspect-video bg-gray-200"></div>
 						<!-- 骨架內容 -->
-						<div class="p-6">
-							<div class="h-6 bg-gray-200 rounded mb-3"></div>
-							<div class="h-4 bg-gray-200 rounded mb-2"></div>
-							<div class="h-4 bg-gray-200 rounded mb-2"></div>
-							<div class="h-4 bg-gray-200 rounded w-3/4 mb-4"></div>
+						<div class="p-4 sm:p-6">
+							<div class="h-5 sm:h-6 bg-gray-200 rounded mb-3"></div>
+							<div class="h-3 sm:h-4 bg-gray-200 rounded mb-2"></div>
+							<div class="h-3 sm:h-4 bg-gray-200 rounded mb-2"></div>
+							<div class="h-3 sm:h-4 bg-gray-200 rounded w-3/4 mb-4"></div>
 							<div class="flex gap-2 mb-4">
-								<div class="h-8 bg-gray-200 rounded-full w-20"></div>
-								<div class="h-8 bg-gray-200 rounded-full w-24"></div>
+								<div class="h-6 sm:h-8 bg-gray-200 rounded-full w-16 sm:w-20"></div>
+								<div class="h-6 sm:h-8 bg-gray-200 rounded-full w-20 sm:w-24"></div>
 							</div>
-							<div class="h-12 bg-gray-200 rounded-lg w-full"></div>
+							<div class="h-10 sm:h-12 bg-gray-200 rounded-lg w-full"></div>
 						</div>
 					</div>
 				</div>
 
 				<!-- 錯誤狀態 -->
-				<div v-else-if="error" class="text-center py-12">
-					<div class="max-w-md mx-auto">
-						<div class="w-16 h-16 mx-auto mb-4 text-red-500">
+				<div v-else-if="error" class="text-center py-8 sm:py-12">
+					<div class="max-w-md mx-auto px-4">
+						<div class="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-4 text-red-500">
 							<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" class="w-full h-full">
 								<path
 									stroke-linecap="round"
@@ -108,16 +111,21 @@
 								/>
 							</svg>
 						</div>
-						<h3 class="text-lg font-semibold text-gray-900 mb-2">載入失敗</h3>
-						<p class="text-gray-600 mb-4">{{ error }}</p>
-						<button @click="fetchCaseStudies" class="px-6 py-2 bg-brand-orange text-white rounded-lg hover:bg-orange-600 transition-colors">重新載入</button>
+						<h3 class="text-base sm:text-lg font-semibold text-gray-900 mb-2">載入失敗</h3>
+						<p class="text-sm sm:text-base text-gray-600 mb-4">{{ error }}</p>
+						<button
+							@click="fetchCaseStudies"
+							class="px-4 sm:px-6 py-2 sm:py-3 bg-brand-orange text-white rounded-lg hover:bg-orange-600 transition-colors text-sm sm:text-base"
+						>
+							重新載入
+						</button>
 					</div>
 				</div>
 
 				<!-- 空狀態 - 沒有載入中、沒有錯誤、也沒有資料時顯示（且非初始載入） -->
-				<div v-else-if="!isLoading && !showLoadingDelay && !error && !isInitialLoad && filteredCaseStudyList.length === 0" class="text-center py-12">
-					<div class="max-w-md mx-auto">
-						<div class="w-16 h-16 mx-auto mb-4 text-gray-400">
+				<div v-else-if="!isLoading && !showLoadingDelay && !error && !isInitialLoad && filteredCaseStudyList.length === 0" class="text-center py-8 sm:py-12">
+					<div class="max-w-md mx-auto px-4">
+						<div class="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-4 text-gray-400">
 							<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" class="w-full h-full">
 								<path
 									stroke-linecap="round"
@@ -127,9 +135,14 @@
 								/>
 							</svg>
 						</div>
-						<h3 class="text-lg font-semibold text-gray-900 mb-2">目前沒有找到案例研究</h3>
-						<p class="text-gray-600 mb-4">請嘗試調整搜尋條件或篩選器</p>
-						<button @click="resetFilters" class="px-6 py-2 bg-brand-orange text-white rounded-lg hover:bg-orange-600 transition-colors">顯示全部案例</button>
+						<h3 class="text-base sm:text-lg font-semibold text-gray-900 mb-2">目前沒有找到案例研究</h3>
+						<p class="text-sm sm:text-base text-gray-600 mb-4">請嘗試調整搜尋條件或篩選器</p>
+						<button
+							@click="resetFilters"
+							class="px-4 sm:px-6 py-2 sm:py-3 bg-brand-orange text-white rounded-lg hover:bg-orange-600 transition-colors text-sm sm:text-base"
+						>
+							顯示全部案例
+						</button>
 					</div>
 				</div>
 
@@ -156,7 +169,7 @@
 					</transition>
 
 					<!-- 案例卡片網格 -->
-					<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+					<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
 						<div
 							v-for="caseStudy in filteredCaseStudyList"
 							:key="caseStudy._id"
@@ -183,7 +196,7 @@
 									:style="{ display: !caseStudy.images || caseStudy.images.length === 0 ? 'flex' : 'none' }"
 								>
 									<div class="text-center">
-										<svg class="w-16 h-16 text-brand-orange mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<svg class="w-12 h-12 sm:w-16 sm:h-16 text-brand-orange mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 											<path
 												stroke-linecap="round"
 												stroke-linejoin="round"
@@ -191,43 +204,43 @@
 												d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
 											/>
 										</svg>
-										<p class="text-brand-orange text-sm font-medium">案例圖片</p>
+										<p class="text-brand-orange text-xs sm:text-sm font-medium">案例圖片</p>
 									</div>
 								</div>
 								<!-- 專案類型標籤 -->
-								<div class="absolute top-4 left-4">
-									<span class="bg-white/90 text-brand-orange px-3 py-1 rounded-full text-sm font-semibold">
+								<div class="absolute top-2 sm:top-4 left-2 sm:left-4">
+									<span class="bg-white/90 text-brand-orange px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-semibold">
 										{{ caseStudy.projectType }}
 									</span>
 								</div>
 							</div>
 
 							<!-- 案例內容 -->
-							<div class="p-6">
+							<div class="p-4 sm:p-6">
 								<!-- 標題 -->
-								<h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-brand-orange transition-colors">
+								<h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3 group-hover:text-brand-orange transition-colors line-clamp-2">
 									{{ caseStudy.title }}
 								</h3>
 
 								<!-- 描述 -->
-								<p class="text-gray-600 mb-4 leading-relaxed line-clamp-4">
+								<p class="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4 leading-relaxed line-clamp-3 sm:line-clamp-4">
 									{{ caseStudy.description }}
 								</p>
 
 								<!-- 解決方案標籤 -->
-								<div v-if="caseStudy.solutions && caseStudy.solutions.length > 0" class="mb-4">
-									<h4 class="text-sm font-semibold text-gray-700 mb-2">解決方案</h4>
-									<div class="flex flex-wrap gap-2">
+								<div v-if="caseStudy.solutions && caseStudy.solutions.length > 0" class="mb-3 sm:mb-4">
+									<h4 class="text-xs sm:text-sm font-semibold text-gray-700 mb-2">解決方案</h4>
+									<div class="flex flex-wrap gap-1 sm:gap-2">
 										<span
 											v-for="(solution, index) in caseStudy.solutions.slice(0, 3)"
 											:key="index"
-											class="bg-gradient-to-r from-brand-orange/10 to-brand-red/10 text-brand-orange px-3 py-1.5 rounded-full text-sm font-medium border border-brand-orange/20 hover:from-brand-orange/20 hover:to-brand-red/20 transition-all duration-200"
+											class="bg-gradient-to-r from-brand-orange/10 to-brand-red/10 text-brand-orange px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-medium border border-brand-orange/20 hover:from-brand-orange/20 hover:to-brand-red/20 transition-all duration-200"
 										>
 											{{ solution }}
 										</span>
 										<span
 											v-if="caseStudy.solutions.length > 3"
-											class="bg-gradient-to-r from-brand-orange/10 to-brand-red/10 text-brand-orange px-3 py-1.5 rounded-full text-sm font-medium border border-brand-orange/20"
+											class="bg-gradient-to-r from-brand-orange/10 to-brand-red/10 text-brand-orange px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-medium border border-brand-orange/20"
 										>
 											+{{ caseStudy.solutions.length - 3 }}
 										</span>
@@ -237,7 +250,7 @@
 								<!-- 查看詳情按鈕 -->
 								<NuxtLink
 									:to="`/case-studies/${caseStudy.slug || caseStudy._id}`"
-									class="w-full inline-block bg-gradient-to-r from-brand-orange to-brand-red text-white font-semibold py-3 rounded-lg hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 text-center"
+									class="w-full inline-block bg-gradient-to-r from-brand-orange to-brand-red text-white font-semibold py-2 sm:py-3 rounded-lg hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 text-center text-sm sm:text-base"
 								>
 									查看詳情
 								</NuxtLink>
@@ -247,28 +260,28 @@
 				</div>
 
 				<!-- 分頁 -->
-				<div v-if="filteredCaseStudyList.length > 0" class="flex flex-col items-center mt-12 space-y-4">
+				<div v-if="filteredCaseStudyList.length > 0" class="flex flex-col items-center mt-8 sm:mt-12 space-y-3 sm:space-y-4">
 					<!-- 分頁資訊 -->
-					<div class="text-sm text-gray-600">
+					<div class="text-xs sm:text-sm text-gray-600 text-center px-4">
 						第 {{ pagination.page }} 頁，共 {{ pagination.pages }} 頁
 						<span v-if="pagination.total > 0" class="text-gray-500"> （共 {{ pagination.total }} 個案例） </span>
 					</div>
 
 					<!-- 分頁控制 -->
-					<nav v-if="pagination.pages > 1" aria-label="分頁導航" class="flex items-center gap-2">
+					<nav v-if="pagination.pages > 1" aria-label="分頁導航" class="flex items-center gap-1 sm:gap-2 flex-wrap justify-center">
 						<!-- 上一頁按鈕 -->
 						<button
 							@click="goToPage(pagination.page - 1)"
 							:disabled="pagination.page <= 1"
 							:class="[
-								'px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 shadow-md',
+								'px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 shadow-md',
 								pagination.page <= 1
 									? 'bg-gray-100 text-gray-400 cursor-not-allowed'
 									: 'bg-white text-gray-700 hover:bg-orange-50 hover:text-brand-orange border border-gray-200'
 							]"
 							aria-label="上一頁"
 						>
-							<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
 							</svg>
 						</button>
@@ -279,7 +292,7 @@
 								v-if="page !== '...'"
 								@click="goToPage(page)"
 								:class="[
-									'px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 shadow-md',
+									'px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 shadow-md',
 									page === pagination.page
 										? 'bg-brand-orange text-white'
 										: 'bg-white text-gray-700 hover:bg-orange-50 hover:text-brand-orange border border-gray-200'
@@ -289,7 +302,7 @@
 							>
 								{{ page }}
 							</button>
-							<span v-else class="px-2 py-2 text-gray-500">...</span>
+							<span v-else class="px-1 sm:px-2 py-2 text-gray-500 text-xs sm:text-sm">...</span>
 						</template>
 
 						<!-- 下一頁按鈕 -->
@@ -297,14 +310,14 @@
 							@click="goToPage(pagination.page + 1)"
 							:disabled="pagination.page >= pagination.pages"
 							:class="[
-								'px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 shadow-md',
+								'px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 shadow-md',
 								pagination.page >= pagination.pages
 									? 'bg-gray-100 text-gray-400 cursor-not-allowed'
 									: 'bg-white text-gray-700 hover:bg-orange-50 hover:text-brand-orange border border-gray-200'
 							]"
 							aria-label="下一頁"
 						>
-							<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
 							</svg>
 						</button>
@@ -597,12 +610,41 @@ onUnmounted(() => {
 	overflow: hidden;
 }
 
+.line-clamp-2 {
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+.line-clamp-3 {
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	line-clamp: 3;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
 .line-clamp-4 {
 	display: -webkit-box;
 	-webkit-line-clamp: 4;
 	line-clamp: 4;
 	-webkit-box-orient: vertical;
 	overflow: hidden;
+}
+
+/* 響應式調整 */
+@media (max-width: 640px) {
+	.portfolio-card {
+		margin-bottom: 1rem;
+	}
+
+	/* 小螢幕時調整間距 */
+	.container {
+		padding-left: 1rem;
+		padding-right: 1rem;
+	}
 }
 
 /* 淡入淡出過渡效果 */
