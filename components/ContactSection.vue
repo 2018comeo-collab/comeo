@@ -276,12 +276,3 @@ onUnmounted(() => {
 	}
 });
 </script>
-
-<style scoped>
-/* 防止首次渲染閃爍 - 統一初始狀態 */
-.contact-info,
-.contact-form,
-.company-brand {
-	opacity: 0;
-}
-</style>
