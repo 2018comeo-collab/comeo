@@ -149,37 +149,6 @@
 				</div>
 			</section>
 
-			<!-- 案例圖片展示 -->
-			<section v-if="currentCaseStudy.images && currentCaseStudy.images.length > 0" class="py-12 sm:py-16">
-				<div class="container mx-auto px-4 sm:px-6 lg:px-8">
-					<div class="max-w-6xl mx-auto">
-						<h2 class="text-2xl sm:text-3xl font-bold text-center text-gray-900 mb-8 sm:mb-12">專案成果展示</h2>
-
-						<!-- 主要圖片 -->
-						<div v-if="currentCaseStudy.images.length === 1" class="mb-6 sm:mb-8">
-							<div class="aspect-video bg-gray-200 rounded-lg overflow-hidden shadow-lg max-w-4xl mx-auto">
-								<img
-									:src="getImageUrl(currentCaseStudy.images[0])"
-									:alt="currentCaseStudy.title"
-									class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-								/>
-							</div>
-						</div>
-
-						<!-- 多張圖片網格 -->
-						<div v-else class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
-							<div v-for="(image, index) in currentCaseStudy.images" :key="index" class="aspect-video bg-gray-200 rounded-lg overflow-hidden shadow-lg">
-								<img
-									:src="getImageUrl(image)"
-									:alt="`${currentCaseStudy.title} - 圖片 ${index + 1}`"
-									class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-								/>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-
 			<!-- 解決方案 -->
 			<section v-if="currentCaseStudy.solutions && currentCaseStudy.solutions.length > 0" class="py-12 sm:py-16 bg-white">
 				<div class="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -206,33 +175,131 @@
 				</div>
 			</section>
 
-			<!-- 專案成果 -->
-			<section v-if="currentCaseStudy.results && currentCaseStudy.results.length > 0" class="py-12 sm:py-16 bg-gray-50">
+			<!-- 案例圖片展示 -->
+			<section v-if="currentCaseStudy.images && currentCaseStudy.images.length > 0" class="py-12 sm:py-16">
 				<div class="container mx-auto px-4 sm:px-6 lg:px-8">
-					<div class="max-w-4xl mx-auto">
-						<h2 class="text-2xl sm:text-3xl font-bold text-center text-gray-900 mb-8 sm:mb-12">專案成果</h2>
+					<div class="max-w-6xl mx-auto">
+						<h2 class="text-2xl sm:text-3xl font-bold text-center text-gray-900 mb-8 sm:mb-12">專案成果展示</h2>
 
-						<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
-							<div v-for="(result, index) in currentCaseStudy.results" :key="index" class="flex items-start p-4 sm:p-6 bg-white rounded-lg shadow-md">
-								<div class="flex-shrink-0 w-6 h-6 sm:w-8 sm:h-8 bg-green-500 text-white rounded-full flex items-center justify-center font-bold mr-3 sm:mr-4">
-									<svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-									</svg>
-								</div>
-								<div>
-									<p class="text-sm sm:text-base text-gray-800 leading-relaxed">{{ result }}</p>
-								</div>
+						<!-- 主要圖片 -->
+						<div v-if="currentCaseStudy.images.length === 1" class="mb-6 sm:mb-8">
+							<div
+								class="aspect-video bg-gray-200 rounded-lg overflow-hidden shadow-lg max-w-4xl mx-auto cursor-pointer group"
+								role="button"
+								tabindex="0"
+								@click="openLightbox(0)"
+								@keyup.enter="openLightbox(0)"
+								@keyup.space.prevent="openLightbox(0)"
+							>
+								<img
+									:src="getImageUrl(currentCaseStudy.images[0])"
+									:alt="currentCaseStudy.title"
+									class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+								/>
+							</div>
+						</div>
+
+						<!-- 多張圖片網格 -->
+						<div v-else class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
+							<div
+								v-for="(image, index) in currentCaseStudy.images"
+								:key="index"
+								class="aspect-video bg-gray-200 rounded-lg overflow-hidden shadow-lg cursor-pointer group"
+								role="button"
+								tabindex="0"
+								@click="openLightbox(index)"
+								@keyup.enter="openLightbox(index)"
+								@keyup.space.prevent="openLightbox(index)"
+							>
+								<img
+									:src="getImageUrl(image)"
+									:alt="`${currentCaseStudy.title} - 圖片 ${index + 1}`"
+									class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+								/>
 							</div>
 						</div>
 					</div>
 				</div>
 			</section>
+
+			<!-- 圖片燈箱 -->
+			<div
+				v-if="isLightboxOpen && currentCaseStudy && currentCaseStudy.images && currentCaseStudy.images.length > 0"
+				class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 px-4"
+				@click.self="closeLightbox"
+			>
+				<button
+					v-if="currentCaseStudy.images.length > 1"
+					class="hidden sm:flex items-center justify-center w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 text-white transition-colors mr-4"
+					@click.stop="showPrevImage"
+					aria-label="上一張圖片"
+				>
+					<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+					</svg>
+				</button>
+
+				<div class="relative max-w-5xl w-full">
+					<button
+						class="absolute -top-10 right-0 sm:-top-14 sm:-right-4 flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/20 hover:bg-white/30 text-white transition-colors"
+						@click.stop="closeLightbox"
+						aria-label="關閉燈箱"
+					>
+						<svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+						</svg>
+					</button>
+
+					<img
+						:src="getImageUrl(currentCaseStudy.images[activeLightboxIndex])"
+						:alt="`${currentCaseStudy.title} - 圖片 ${activeLightboxIndex + 1}`"
+						class="w-full max-h-[80vh] object-contain rounded-lg shadow-2xl bg-white"
+					/>
+
+					<div class="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/60 text-white text-sm sm:text-base px-3 py-1 rounded-full">
+						{{ activeLightboxIndex + 1 }} / {{ currentCaseStudy.images.length }}
+					</div>
+				</div>
+
+				<button
+					v-if="currentCaseStudy.images.length > 1"
+					class="hidden sm:flex items-center justify-center w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 text-white transition-colors ml-4"
+					@click.stop="showNextImage"
+					aria-label="下一張圖片"
+				>
+					<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+					</svg>
+				</button>
+
+				<!-- 行動版切換按鈕 -->
+				<div v-if="currentCaseStudy.images.length > 1" class="absolute bottom-6 left-0 right-0 flex justify-between px-6 sm:hidden">
+					<button
+						class="flex items-center justify-center w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 text-white transition-colors"
+						@click.stop="showPrevImage"
+						aria-label="上一張圖片"
+					>
+						<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+						</svg>
+					</button>
+					<button
+						class="flex items-center justify-center w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 text-white transition-colors"
+						@click.stop="showNextImage"
+						aria-label="下一張圖片"
+					>
+						<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+						</svg>
+					</button>
+				</div>
+			</div>
 		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref, onMounted, onBeforeUnmount, watch } from "vue";
 import { useCaseStudyStore } from "~/stores/caseStudyStore";
 import { storeToRefs } from "pinia";
 
@@ -291,8 +358,59 @@ const getImageUrl = (imageUrl: string) => {
 	return `${useRuntimeConfig().public.apiBaseUrl}${imageUrl}`;
 };
 
+const isLightboxOpen = ref(false);
+const activeLightboxIndex = ref(0);
+
+const openLightbox = (index: number) => {
+	const images = currentCaseStudy.value?.images;
+	if (!images || images.length === 0) return;
+	activeLightboxIndex.value = index;
+	isLightboxOpen.value = true;
+};
+
+const closeLightbox = () => {
+	isLightboxOpen.value = false;
+};
+
+const showPrevImage = () => {
+	const images = currentCaseStudy.value?.images;
+	if (!images || images.length <= 1) return;
+	activeLightboxIndex.value = (activeLightboxIndex.value - 1 + images.length) % images.length;
+};
+
+const showNextImage = () => {
+	const images = currentCaseStudy.value?.images;
+	if (!images || images.length <= 1) return;
+	activeLightboxIndex.value = (activeLightboxIndex.value + 1) % images.length;
+};
+
+const handleKeydown = (event: KeyboardEvent) => {
+	if (!isLightboxOpen.value) return;
+
+	if (event.key === "Escape") {
+		event.preventDefault();
+		closeLightbox();
+	} else if (event.key === "ArrowRight") {
+		event.preventDefault();
+		showNextImage();
+	} else if (event.key === "ArrowLeft") {
+		event.preventDefault();
+		showPrevImage();
+	}
+};
+
+watch(isLightboxOpen, (value) => {
+	if (process.client) {
+		document.body.style.overflow = value ? "hidden" : "";
+	}
+});
+
 // 組件掛載時載入案例詳情
 onMounted(async () => {
+	if (process.client) {
+		window.addEventListener("keydown", handleKeydown);
+	}
+
 	try {
 		if (slug) {
 			await fetchCaseStudyBySlug(slug);
@@ -301,6 +419,13 @@ onMounted(async () => {
 		}
 	} catch (err) {
 		console.error("載入案例詳情失敗:", err);
+	}
+});
+
+onBeforeUnmount(() => {
+	if (process.client) {
+		window.removeEventListener("keydown", handleKeydown);
+		document.body.style.overflow = "";
 	}
 });
 </script>
